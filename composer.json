@@ -1,0 +1,25 @@
+{
+    "name": "ith/librarydosscopy",
+    "description": "La bibliothèque ith/librarydosscopy centralise tous les modèles utilisés dans les divers projets d'API, offrant ainsi une base commune pour représenter les entités de données.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ith\\Librarydosscopy\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "dzeko003",
+            "email": "berenismassamba@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "illuminate/database": "^9.0|^10.0|^11.0",
+        "illuminate/support": "^9.0|^10.0|^11.0",
+        "illuminate/notifications": "^9.0|^10.0|^11.0",
+        "laravel/sanctum": "^3.2",
+        "php": "^8.0.2"
+    }
+}
