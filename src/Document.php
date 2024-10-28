@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Printer extends Model
+class Document extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'printers';
+    protected $table = 'documents';
 
     protected $fillable = [
-        'cyber_id',
-        'name',
-        'print_node_id',
-        'ip_address',
-        'mac_address',
+        'user_id',
+        'file_path',
+        'file_name',
+        'file_size',
     ];
 
     protected $casts = [
+        'file_size' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
 
-    public function cyber()
+    public function user()
     {
-        return $this->belongsTo(Cyber::class);
+        return $this->belongsTo(User::class);
     }
 }

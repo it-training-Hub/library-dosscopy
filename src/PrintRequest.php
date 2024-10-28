@@ -4,50 +4,54 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PrintRequest extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'print_requests'; // Remplacez par le nom correct de votre table
 
     protected $fillable = [
         'user_id',
         'cyber_id',
         'printer_id',
-        'document_url',
-        'status',
+        'document_id',
+        'status_id',
         'requested_at',
         'printed_at',
     ];
 
-    /**
-     * Get the user that made the print request.
-     */
+    protected $casts = [
+        'requested_at' => 'datetime',
+        'printed_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Get the cyber where the print request was made.
-     */
     public function cyber()
     {
         return $this->belongsTo(Cyber::class);
     }
 
-    /**
-     * Get the printer used for the print request.
-     */
     public function printer()
     {
         return $this->belongsTo(Printer::class);
     }
 
-    /**
-     * Get the print history associated with the print request.
-     */
-    public function printHistories()
+    public function status()
     {
-        return $this->hasMany(PrintHistory::class);
+        return $this->belongsTo(Status::class);
+    }
+
+    public function printRequestDetails()
+    {
+        return $this->hasMany(PrintRequestDetail::class);
     }
 }

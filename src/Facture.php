@@ -6,18 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Printer extends Model
+class Facture extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'printers';
+    protected $table = 'factures';
 
     protected $fillable = [
-        'cyber_id',
-        'name',
-        'print_node_id',
-        'ip_address',
-        'mac_address',
+        'file_path',
+        'transaction_id',
     ];
 
     protected $casts = [
@@ -26,8 +23,8 @@ class Printer extends Model
         'deleted_at' => 'datetime',
     ];
 
-    public function cyber()
+    public function transaction()
     {
-        return $this->belongsTo(Cyber::class);
+        return $this->belongsTo(Transaction::class);
     }
 }

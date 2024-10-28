@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Printer extends Model
+class PrintAttribute extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'printers';
+    protected $table = 'print_attributes';
 
     protected $fillable = [
-        'cyber_id',
+        'print_type_id',
+        'field_type_id',
         'name',
-        'print_node_id',
-        'ip_address',
-        'mac_address',
+        'placeholder',
+        'details',
     ];
 
     protected $casts = [
@@ -26,8 +26,14 @@ class Printer extends Model
         'deleted_at' => 'datetime',
     ];
 
-    public function cyber()
+    // Optionnel : définissez les relations si nécessaire
+    public function printType()
     {
-        return $this->belongsTo(Cyber::class);
+        return $this->belongsTo(printType::class);
+    }
+
+    public function fieldType()
+    {
+        return $this->belongsTo(FieldType::class);
     }
 }
